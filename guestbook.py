@@ -51,13 +51,13 @@ def checkbox_key(boxes):
 
 class Checkbox(webapp2.RequestHandler):
     def post(self):
-        self.response.header['Content-Type'] = 'text/html'
+        self.response.headers ['Content-Type'] = 'text/html'
 
         for box in boxes:
           checked_box = self.request.get(box)
-          if checked_box:
-	      checked_box.put()
-          self.response.out.write('my checkbox is, %s' (box))
+          #if checked_box:
+	   #   checked_box.put()
+          self.response.out.write('my checkbox is, %s' %(box))
 
 
 class Greeting(ndb.Model):
@@ -82,6 +82,7 @@ class MainPage(webapp2.RequestHandler):
             url_linktext = 'Login'
 
         template_values = {
+            'boxes' : boxes,
             'greetings': greetings,
             'guestbook_name': urllib.quote_plus(guestbook_name),
             'url': url,
@@ -110,8 +111,8 @@ class Guestbook(webapp2.RequestHandler):
 
         for box in boxes:
           checked_box = self.request.get(box)
-          if checked_box:
-              checked_box.put()
+          #if checked_box:
+           #   checked_box.put()
            #self.response.out.write('my checkbox is, %s' (box))
 
 
@@ -130,4 +131,5 @@ class Guestbook(webapp2.RequestHandler):
 application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
+    ('/test', Checkbox),
 ], debug=True)
