@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+{% autoescape true %}
+
+<html>
+  <body>
+    {% for greeting in greetings %}
+      {% if greeting.author %}
+        <b>{{ greeting.author.nickname() }}</b> wrote:
+      {% else %}
+       An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting.content }} {{ checked_box }}</blockquote>
+    {% endfor %}
+
+    <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+
+    <hr>
+
+    <form method="post" action="/test"> Checkboxes:
+      {% set boxes = ['fun', 'happy', 'sad'] %}
+      {% for box in boxes %}
+       <input type = "checkbox" name = "{{box}}" value = "1" > {{box}}
+
+      {% endfor %} 
+      <input type = "submit" value = "Submit" >
+    </form> 
+  
+    <br>
+    <!-- <form>
+      <input type = "checkbox" name = "cb1" value = "fun"> Fun
+      <input type = "checkbox" name = "cb2" value = "happy"> Happy
+      <input type = "submit" value = "Submit" >
+    </form> -->
+      
+    
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+
+
+  </body>
+</html>
+{% endautoescape %}
