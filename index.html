@@ -1,16 +1,15 @@
-
 <!DOCTYPE html>
 {% autoescape true %}
 
 <html>
   <body>
-    {% for greeting in greetings %}
-      {% if greeting.author %}
-        <b>{{ greeting.author.nickname() }}</b> wrote:
+    {% for box in boxs %}
+      {% if box.author %}
+        <b>{{ box.author.nickname() }}</b> wrote:
       {% else %}
        An anonymous person wrote:
       {% endif %}
-      <blockquote>{{ greeting.content }} {{ checked_box }}</blockquote>
+      <blockquote> {% if checked %} <input type = "checkbox" checked> {{ box.content }}  </blockquote> {% endif %}
     {% endfor %}
 
     <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
@@ -20,15 +19,22 @@
 
     <hr>
 
-    <form method="post" action="/test"> Checkboxes:
-      {% set boxes = ['fun', 'happy', 'sad'] %}
+    <form method="post"> Checkboxes:
       {% for box in boxes %}
+      {% if boxes [box] %}
+       <input type = "checkbox" name = "{{box}}" value = "1" checked> {{box}}
+      {% else %}
        <input type = "checkbox" name = "{{box}}" value = "1" > {{box}}
+      {% endif %}
 
       {% endfor %} 
       <input type = "submit" value = "Submit" >
     </form> 
-  
+    
+    <form action = "/add" method = "post"> Checkboxes1
+	<input type = "checkbox" name = "added_cb">
+    </form> 
+
     <br>
     <!-- <form>
       <input type = "checkbox" name = "cb1" value = "fun"> Fun
