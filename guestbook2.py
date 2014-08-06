@@ -111,6 +111,8 @@ class MainPage(webapp2.RequestHandler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
 
+	print 'boxes =' , boxes
+
         template_values = {
             'boxes' : boxes,
             'greetings': greetings,
@@ -119,6 +121,8 @@ class MainPage(webapp2.RequestHandler):
             'url_linktext': url_linktext,
         }
 
+        template = JINJA_ENVIRONMENT.get_template('index.html')
+        self.response.write(template.render(template_values))
 
 class Guestbook(webapp2.RequestHandler):
     def post(self):

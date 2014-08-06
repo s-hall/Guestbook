@@ -3,13 +3,12 @@
 
 <html>
   <body>
-    {% for box in boxs %}
-      {% if box.author %}
-        <b>{{ box.author.nickname() }}</b> wrote:
+    <p> Testing 1....2.....3 </p>
+    {% for box in boxes %}
+      {% if checked %}
+         <input type = "checkbox" checked> {{ box }}
       {% else %}
-       An anonymous person wrote:
       {% endif %}
-      <blockquote> {% if checked %} <input type = "checkbox" checked> {{ box.content }}  </blockquote> {% endif %}
     {% endfor %}
 
     <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
